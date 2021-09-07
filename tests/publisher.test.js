@@ -2,10 +2,6 @@ const { response } = require('express');
 const request = require('supertest')
 const app = require('../publisher');
 
-// app.use("/topic",topicRouter);
-// app.use("/subscribe",subscriptionRouter);
-// app.use("/publish",publishRouter);
-
 describe('Topic Endpoint', () => {
   it('should not create an empty topic', async () => {
     const res = await request(app)
