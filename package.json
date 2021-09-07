@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start":  "concurrently \"npm run publish\" \"npm run subscribe\"",
+    "start": "concurrently \"npm run publish\" \"npm run subscribe\"",
     "publish": "nodemon publisher.js",
     "subscribe": "nodemon subscriber.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "migrate": "cross-env NODE_ENV=production npx sequelize-cli db:migrate",
+    "migrate:test": "cross-env NODE_ENV=test npx sequelize-cli db:create && cross-env NODE_ENV=test npx sequelize-cli db:migrate",
+    "migrate:reset": " cross-env NODE_ENV=test npx sequelize-cli db:migrate:undo:all && npm run migrate:test",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
+    "pretest": "cross-env NODE_ENV=test && npm run migrate:reset"
   },
   "author": "Komla Sodji",
   "license": "ISC",
@@ -22,6 +26,15 @@
   },
   "devDependencies": {
     "concurrently": "^6.2.1",
-    "sequelize-cli": "^6.2.0"
+    "cross-env": "^7.0.3",
+    "jest": "^27.1.0",
+    "sequelize-cli": "^6.2.0",
+    "supertest": "^6.1.6"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }

@@ -17,6 +17,9 @@ module.exports = (sequelize, DataTypes) => {
     url:{
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        is: /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)*:\d*/
+      }
     },
     topic:{
       type: DataTypes.STRING,

@@ -6,12 +6,11 @@ const { default: axios } = require('axios');
 
 const createSubscription = async(req, res) => {
     try {
-        const data = {url: req.body.url, topic: req.params.topic};
-        const subscription = await db.Subscriber.create(data);
-        if(subscription) return res.status(200).send(data);
-        return res.send(400).send(subscription);
+        const { url } = req.body;
+        const { topic } = req.params; 
+        await db.Subscriber.create({url: url, topic: topic});
+        return res.status(200).send({url: url, topic: topic});
     }catch(error){
-        console.log(error);
         return res.status(500).send(error);
     }
 }
@@ -40,9 +39,8 @@ const receiveMessage = async(req, res) => {
         const { subscriber } = req.params;
         const { data } = req.body;
         console.log({subscriber: subscriber, message: data});
-        res.status(200).send("success");
+        res.status(200).json({message:"success"});
     } catch (error) {
-        console.log("error",error);
         return res.status(500).send(error);
     }
 }

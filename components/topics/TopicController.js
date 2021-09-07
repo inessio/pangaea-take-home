@@ -6,9 +6,9 @@ const db = require('./../../models');
 const createTopic = async(req, res) => {
     try 
     {
-        const data = req.body
-        const topic = await db.Topic.create({topic: data.topic});
-        return res.status(200).send(topic);
+        const { topic } = req.body
+        const response = await db.Topic.create({topic: topic});
+        return res.status(200).send(response);
     }catch(error){
         return res.status(500).send(error);
     }
