@@ -3,12 +3,15 @@
 const express = require('express');
 const debugLib  = require('debug');
 const http = require('http');
+const helmet = require("helmet");
+
 const topicRouter = require('./routes/topic');
 const subscriptionRouter = require('./routes/subscription');
 const publishRouter = require('./routes/publish');
 
 const app = express();
 app.use(express.json());
+app.use(helmet());
 
 
 /**
@@ -38,6 +41,8 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+
 
 app.use("/topic",topicRouter);
 app.use("/subscribe",subscriptionRouter);

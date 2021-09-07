@@ -1,15 +1,15 @@
-// const { EventEmitter } = require("events");
-// const firstEmitter = new EventEmitter();
-
 'use strict'
 
 const express = require('express');
 const debugLib  = require('debug');
 const http = require('http');
+const helmet = require("helmet");
+
 const subscriberRoute = require('./routes/subscriber');
 
 const app = express();
 app.use(express.json());
+app.use(helmet());
 
 
 /**

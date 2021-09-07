@@ -27,7 +27,6 @@ const publishMessage = async(req,res) => {
             }
         });
         for (const subscriber of subscribers) {
-            console.log("subscribersubscribersubscribersubscribersubscriber",data);
             axios.post(subscriber.url, data);
         }
         res.status(200).send("success"); 
