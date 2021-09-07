@@ -9,7 +9,8 @@ Requirements ( Nodejs > = version 14.0, MySQL > = version 5.7).
 2. Create a .env file from the .env.example file and values with your local mysql credentials
 3. Run npm install: this will install all the application dependency 
 4. Run npm run setup :  this will create and run the Database migrations
-5. Start the application by running npm start.
+5. npm test:  run all tests
+6. Start the application by running npm start.
 
 ### Next to do
 1. Add dockerfile to simplify the application setup.
